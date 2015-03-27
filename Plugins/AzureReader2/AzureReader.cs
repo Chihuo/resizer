@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using ImageResizer.Configuration.Issues;
 using System.Security;
 using ImageResizer.Configuration.Xml;
+using Microsoft.WindowsAzure;
 
 namespace ImageResizer.Plugins.AzureReader2 {
 
@@ -19,13 +20,13 @@ namespace ImageResizer.Plugins.AzureReader2 {
         string vPath;
         bool lazyExistenceCheck = false;
 
-        public AzureReader2Plugin(NameValueCollection args) {
-            blobStorageConnection = args["connectionstring"];
-            blobStorageEndpoint = args["blobstorageendpoint"];
-            if (string.IsNullOrEmpty(blobStorageEndpoint)) blobStorageEndpoint = args["endpoint"];
-            vPath = args["prefix"];
-            lazyExistenceCheck = Utils.getBool(args, "lazyExistenceCheck", lazyExistenceCheck);
-            _registerAsVirtualPathProvider = Utils.getBool(args, "vpp", _registerAsVirtualPathProvider);
+        public AzureReader2Plugin()
+        {
+            blobStorageConnection = CloudConfigurationManager.GetSetting("AzureReader2.BlobStorageConnectionString");
+            blobStorageEndpoint = CloudConfigurationManager.GetSetting("AzureReader2.BlobStorageEndpoint");
+            vPath = CloudConfigurationManager.GetSetting("AzureReader2.VirtualPathPrefix");
+            lazyExistenceCheck = false;
+            _registerAsVirtualPathProvider = true;
         }
 
 
