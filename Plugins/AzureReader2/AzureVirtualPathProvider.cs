@@ -3,7 +3,7 @@ using System;
 using System.Security.Permissions;
 using System.Web;
 using System.Web.Hosting;
-using Microsoft.WindowsAzure;
+using Microsoft.Azure;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using ImageResizer.Util;
